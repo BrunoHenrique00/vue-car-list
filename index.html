@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    </head>
+    <body>
+
+
+
+        <div id="app">
+            <v-app>
+                <v-main>
+                    <v-app-bar
+                    color="green"
+                    >
+                    Minha loja de carros 🚓
+                    </v-app-bar>
+
+                    <div class="input-car">
+                        <v-text-field
+                            label="Nome do seu carro"
+                            outlined
+                            color="green"
+                            class="input"
+                            v-model="input"
+                        ></v-text-field>
+                    </div>
+
+                    <div class="list">
+                        <v-btn
+                        v-on:click="addCars"
+                        class="btn-add"
+                        outlined
+                        >Adicionar
+                        </v-btn>
+    
+                        <h2>Lista de carros</h2>
+
+                        <div class="item" v-for="(product, index) in products" v-bind:key="index">
+                            <span>
+                                {{ product }}
+                            </span>
+                            <v-btn
+                            class="mx-2"
+                            fab
+                            dark
+                            small
+                            color="white"
+                            v-on:click="deleteCar(index)"
+                            >
+                                <v-icon color="green" class="" >
+                                    mdi-delete
+                                </v-icon> 
+                            </v-btn>  
+                        </div>
+
+                    </div>
+
+                    <!-- Caixa de dialogo -->
+                    <v-dialog
+                        v-model="dialog3"
+                        max-width="500px"
+                    >
+                        <v-card>
+                        <v-card-title>
+                            <span>Preencha o campo com algum carro!</span>
+                            <v-spacer></v-spacer>
+                            <v-menu
+                            bottom
+                            left
+                            >
+                            <v-list>
+                                <v-list-item
+                                v-for="(item, i) in items"
+                                :key="i"
+                                @click="() => {}"
+                                >
+                                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                            </v-menu>
+                        </v-card-title>
+                        <v-card-actions>
+                            <v-btn
+                            color="green"
+                            text
+                            @click="dialog3 = false"
+                            >
+                            Fechar
+                            </v-btn>
+                        </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    
+                </v-main>
+            </v-app>
+        </div>
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+        <script>
+            const app = new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: {
+                products: ['Camaro', 'Mercedes', 'Ferrari', 'Up TSI'],
+                input: '',
+                dialog3: false
+            },
+            methods: {
+                addCars: (newCar) => {
+                    if(app.input === ''){
+                        app.dialog3 = true
+                        return
+                    } 
+                    app.products.push(app.input)
+                    app.input = ''
+                },
+                deleteCar: (carId) => {
+                    app.products.splice(carId, 1)
+                    console.log(carId)
+                }
+            }
+            })
+
+        </script>
+    </body>
+</html>
