@@ -3,6 +3,8 @@
 ![](/img/app.png)
 ![](/img/app-warn.png)
 
+[Link para preview 🔖](https://brunohenrique00.github.io/vue-car-list/)
+
 ## 🚀 Tecnologias
 
 * Somente Vue.js 😄
